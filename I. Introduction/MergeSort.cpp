@@ -3,16 +3,32 @@
 using namespace std;
 
 void mergeSort(int * array, int n);
-void merge(int * A, int * B, int n);
+void merge(int * a, int * b, int n);
 
 int main(){
-    int A[] = {5,4,1,8,7,2,6,3};
-    int n = sizeof(A) / sizeof(int);
 
-    cout << "A is an array of size " << n << ", with values " << A << endl;
+    int a[] = {5,4,1,8,7,2,6,3};
+    int n = sizeof(a) / sizeof(int);
 
-    mergeSort(A, n);
-    cout << "After the mergeSort, A is " << A << endl;
+    int * aPtr = NULL;
+    aPtr = new int[n];
+
+    cout << "a is an array of size " << n << ", with values ";
+
+    for(int i = 0; i < n ; i++){
+        cout << *(a+i) << " ";
+    }
+
+    cout << endl;
+
+    mergeSort(a, n);
+    cout << "After the mergeSort, a is ";
+    
+    for(int i = 0; i < n ; i++){
+        cout << *(a+i) << " ";
+    }
+
+    cout << endl;
 }
 
 void mergeSort(int * array, int n) {
@@ -21,45 +37,45 @@ void mergeSort(int * array, int n) {
     int m = n/2;
 
     //Declarando arrays: 
-    //  * Dos de length: m = n/2; A y B.
-    int * A = NULL;
-    A = new int[m];
-    int * B = NULL;
-    B = new int [m];
+    //  * Dos de length: m = n/2; a y b.
+    int * a = NULL;
+    a = new int[m];
+    int * b = NULL;
+    b = new int [m];
 
     //Poblando arrays...
-    //x es el indice para poblar A; y el indice para poblar B.
+    //x es el indice para poblar a; y el indice para poblar b.
     int x = 0, y = m;
     for(int i = 0; i < m; i++){
-        *(A+i) = *(array+x);
-        *(B+i) = *(array+y);
+        *(a+i) = *(array+x);
+        *(b+i) = *(array+y);
         x++;
         y++;
     }
 
     if(m == 1) {
-        merge(A, B, n);
+        merge(a, b, n);
     } 
     
 
-    mergeSort(A, m);
-    mergeSort(B, m);
+    mergeSort(a, m);
+    mergeSort(b, m);
 }
 
-void merge(int * A, int * B, int n) {
+void merge(int * a, int * b, int n) {
     int i = 0, j = 0;
 
-    //  * Uno de length: n = 2 * m; C.
-    int * C = NULL;
-    C = new int[n];
+    //  * Uno de length: n = 2 * m; c.
+    int * c = NULL;
+    c = new int[n];
 
     for(int k = 0; k < n; k++){
-        if(*(A+i) < *(B+j)){
-            *(C+k) = *(A+i);
+        if(*(a+i) < *(b+j)){
+            *(c+k) = *(a+i);
             i++;
         }
         else{
-            *(C+k) = *(B+j);
+            *(c+k) = *(b+j);
             j++;
         }
     }
