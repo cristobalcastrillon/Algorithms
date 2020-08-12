@@ -2,10 +2,17 @@
 
 using namespace std;
 
-int * mergeSort(int array[]);
+void mergeSort(int * array, int n);
+void merge(int * A, int * B, int n);
 
 int main(){
-    int array[] = {5,4,1,8,7,2,6,3};
+    int A[] = {5,4,1,8,7,2,6,3};
+    int n = sizeof(A) / sizeof(int);
+
+    cout << "A is an array of size " << n << ", with values " << A << endl;
+
+    mergeSort(A, n);
+    cout << "After the mergeSort, A is " << A << endl;
 }
 
 void mergeSort(int * array, int n) {
@@ -15,8 +22,10 @@ void mergeSort(int * array, int n) {
 
     //Declarando arrays: 
     //  * Dos de length: m = n/2; A y B.
-    int * A = new int[m];
-    int * B = new int [m];
+    int * A = NULL;
+    A = new int[m];
+    int * B = NULL;
+    B = new int [m];
 
     //Poblando arrays...
     //x es el indice para poblar A; y el indice para poblar B.
@@ -30,17 +39,19 @@ void mergeSort(int * array, int n) {
 
     if(m == 1) {
         merge(A, B, n);
-    }
+    } 
+    
 
-    mergeSort(A);
-    mergeSort(B);
+    mergeSort(A, m);
+    mergeSort(B, m);
 }
 
 void merge(int * A, int * B, int n) {
     int i = 0, j = 0;
 
     //  * Uno de length: n = 2 * m; C.
-    int * C = new int[n];
+    int * C = NULL;
+    C = new int[n];
 
     for(int k = 0; k < n; k++){
         if(*(A+i) < *(B+j)){
