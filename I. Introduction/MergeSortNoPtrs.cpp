@@ -11,16 +11,17 @@ int main(){
 
     cout << "A is an array of size " << n << ", with values ";
     for(int i = 0; i < n; i++){
-        cout << A[i];
+        cout << "[" << A[i] << "\t";
     }
-    cout << endl;
+    cout << "]" << endl;
 
     mergeSort(A, n);
+
     cout << "After the mergeSort, A is ";
     for(int i = 0; i < n; i++){
-        cout << A[i];
+        cout << "[" << A[i] << "\t";
     }
-    cout << endl;
+    cout << "]" << endl;
 }
 
 void mergeSort(int array[], int n) {
