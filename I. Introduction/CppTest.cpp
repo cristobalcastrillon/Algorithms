@@ -93,17 +93,46 @@ int * merge(int * aPtr, int * bPtr, int l, int ind){
     //Populate array 'c':
     int k = 0;
     int h = 0;
+
     for(int i = 0; i < m; i++){
         //There's a goddamn problem with the merge subroutine... FIND IT!
+
+        //[4,3,5,2] 
+        //–> [4,3] - [5,2] 
+
+        //—> [4] merges with [3] in c[2] = [xxx, xxx]
+
+        //      k     h
+        //     [0]   [0] 
+        //  —> [4] > [3]
+        // EXPECTED:
+        //      —> c[0] = [3] 
+        //      —> c[1] = [4] 
+
+        //—> [5] merges with [2] in c[2] = [xxx, xxx]
+
+        //      k     h
+        //     [0]   [0] 
+        //  —> [5] > [2]
+        // EXPECTED:
+        //      —> c[0] = [2]
+        //      —> c[1] = [5]
+
+        //If array 'a' in index k is less than or equal to 'b' in h:
+        //  'c' in i is equal to 'a' in k.
         if(*(aPtr+k) <= *(bPtr+h)){
             c[i] = *(aPtr+k);
-            k++;
+            k++; //Move the index one position to ensure the same value is not used again.
         }
+
+        //Otherwise (if 'a' in k is greater than 'b' in h), 'c' in i is equal to 'b' in h.
         if(*(aPtr+k) > *(bPtr+h)){
             c[i] = *(bPtr+h);
-            h++;
+            h++; //Move the index one position to ensure the same value is not used again.
         }
+        
         cout << "c: [" << c[i] << "]\n";
     }
+
     return cPtr;
 }
