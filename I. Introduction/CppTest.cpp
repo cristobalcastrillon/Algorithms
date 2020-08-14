@@ -63,8 +63,13 @@ int * mergeSort(int * arrPtr, int n, int ind){
         bPtr = mergeSort(bPtr, l, ind);
     }
 
+    if(l == 1){
+        
+    }
+
     //Call the merge() subroutine:
     arrPtr = merge(aPtr, bPtr, l, ind);
+
     return arrPtr;
 }
 
