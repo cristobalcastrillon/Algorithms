@@ -103,16 +103,16 @@ int * merge(int * aPtr, int * bPtr, int l, int ind){
         //  'c' in i is equal to 'a' in k.
         if(*(aPtr+k) <= *(bPtr+h)){
             c[i] = *(aPtr+k);
+            k++; //Move the index 'k' one position to ensure the same value is not used again.
         }
 
         //Otherwise (if 'a' in k is greater than 'b' in h, 'c' in i is equal to 'b' in h.
         if(*(aPtr+k) > *(bPtr+h)){
             c[i] = *(bPtr+h);
+            h++; //Move the index 'h' one position to ensure the same value is not used again.
         }
 
         //The issue is located in the managing of the indexes!!!
-        k++; //Move the index 'k' one position to ensure the same value is not used again.
-        h++; //Move the index 'h' one position to ensure the same value is not used again.
 
         cout << "c: [" << c[i] << "]\n";
     }
