@@ -56,7 +56,6 @@ int * mergeSort(int * arrPtr, int n){
 
     if(l == 1){
         simpleSort(aPtr, bPtr);
-        cout << "Sorted elements after simpleSort: "<< *aPtr << " " << *bPtr << endl;
     }
 
     //Call the merge() subroutine:
