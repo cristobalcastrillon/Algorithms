@@ -89,10 +89,6 @@ int * merge(int * aPtr, int * bPtr, int l){
                 h++;
             }
 
-            else{
-                *(aPtr+h-1) = *(bPtr+k)+1;
-            }
-
         }
 
         if(*(bPtr+k) < *(aPtr+h)){
