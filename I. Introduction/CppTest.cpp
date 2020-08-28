@@ -62,10 +62,6 @@ int * mergeSort(int * arrPtr, int n){
     return arrPtr;
 }
 
-//Consider REMAKING all of the merge subroutine:
-// * Doing so differently, by using a 'while' (or do-while) statement instead of a 'for':
-//   * "while(i < m)" for example. 
-
 //Merge subroutine.
 //Merge parameters: aPtr — pointer to the first array; bPtr — pointer to the second array; l — length of each array.
 //Assumptions: 
