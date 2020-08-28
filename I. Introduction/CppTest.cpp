@@ -8,20 +8,18 @@ int * merge(int *, int *, int);
 void simpleSort(int *, int *);
 
 int main(){
-    //Arrays are allocated statically in memory...
+
     int a[] = {2,5,4,1,3,7,8,6};
     int n =  sizeof(a)/sizeof(int);
 
     int *aPtr = &a[0];
-    // ...so the pointer to the head of the array incremented in 1
-    // should be the next element of the array.
 
     //Print the original array:
     for(int i = 0; i < n; i++){
         cout << "[" << *(aPtr+i) << "]\n";
     }
     
-    //Call the mergeSort() function on 'a';
+    //Call the mergeSort() function on 'a':
     aPtr = mergeSort(aPtr, n);
 
     //Print the sorted array:
@@ -82,45 +80,17 @@ int * merge(int * aPtr, int * bPtr, int l){
     //Create a pointer to array 'c':
     int * cPtr = &c[0];
 
-    //Populate array 'c':
-    int k = 0;
+    //Indexes for 'a' and 'b' respectively.
     int h = 0;
+    int k = 0;
 
-    for(int i = 0; i < m; i++){
-        //There's a goddamn problem with the merge subroutine... FIND IT!
+    //Index for 'c'.
+    int i = 0;
 
-        //If array 'a' in index k is less than or equal to 'b' in h:
-        //  'c' in i is equal to 'a' in k.
-        if(*(aPtr+k) <= *(bPtr+h)){
-            c[i] = *(aPtr+k);
-
-            //Evaluate that the index 'k' is inside the space of the array 'a'.
-            if(k < l){
-                k++; //Move the index 'k' one position to ensure the same value is not used again.
-
-                if(k == l){
-                    *(aPtr+k-1) = *(bPtr+h);
-                }
-            }
-        }
-
-        //Otherwise (if 'a' in k is greater than 'b' in h, 'c' in i is equal to 'b' in h.
-        if(*(aPtr+k) > *(bPtr+h)){
-            c[i] = *(bPtr+h);
-            
-            //Evaluate that the index 'h' is inside the space of the array 'b'.
-            if(h < l){
-                h++; //Move the index 'h' one position to ensure the same value is not used again.
-
-                if(h < l){
-                    *(bPtr+h-1) = *(aPtr+k);
-                }
-            }
-        }
-
-        //The issue is located in the managing of the indexes!!!
-
-        // cout << "c: [" << c[i] << "]\n";
+    //Populate array 'c':
+    while(i < m){
+        
+        i++;
     }
 
     return cPtr;
