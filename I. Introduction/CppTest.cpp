@@ -3,8 +3,8 @@
 
 using namespace std;
 
-int * mergeSort(int *, int, int);
-int * merge(int *, int *, int, int);
+int * mergeSort(int *, int);
+int * merge(int *, int *, int);
 void simpleSort(int *, int *);
 
 int main(){
@@ -15,16 +15,14 @@ int main(){
     int *aPtr = &a[0];
     // ...so the pointer to the head of the array incremented in 1
     // should be the next element of the array.
+
     //Print the original array:
     for(int i = 0; i < n; i++){
         cout << "[" << *(aPtr+i) << "]\n";
     }
-
-    //Create the 'ind' variable:
-    int ind = 0;
     
     //Call the mergeSort() function on 'a';
-    aPtr = mergeSort(aPtr, n, ind);
+    aPtr = mergeSort(aPtr, n);
 
     //Print the sorted array:
     for(int i = 0; i < n; i++){
@@ -34,24 +32,16 @@ int main(){
 
 //MergeSort algorithm.
 //MergeSort parameters: arrPtr — pointer to the 'head' of an array; n — length of that array.
-// ind — Index for Manual Debugging.
-int * mergeSort(int * arrPtr, int n, int ind){
+int * mergeSort(int * arrPtr, int n){
     //Create two temporal arrays of length l = n/2:
     int l = n/2;
     int a[l];
     int b[l];
 
-    ind = rand() % 50;
-
-    //This is what I call 'manual debugging'...
-    cout << ind << ". This is how arrays 'a' and 'b' are 'populated'" << endl;
     //Populate the arrays:
     for(int i = 0; i < l; i++){
         a[i] = *(arrPtr+i);
         b[i] = *(arrPtr+l+i);
-
-        //Printing because for whatever reason the debugger won't step into:
-        cout << "a: [" << a[i] << "]\t" << "b: [" << b[i] << "]\n";
     }
 
     //Create pointers for each of the arrays:
@@ -60,37 +50,33 @@ int * mergeSort(int * arrPtr, int n, int ind){
 
     //Call the mergeSort() function on each of the arrays:
     if(l > 1){
-        aPtr = mergeSort(aPtr, l, ind);
-        bPtr = mergeSort(bPtr, l, ind);
+        aPtr = mergeSort(aPtr, l);
+        bPtr = mergeSort(bPtr, l);
     }
 
     if(l == 1){
         simpleSort(aPtr, bPtr);
-        cout << "   Sorted elements after simpleSort: "<< *aPtr << " " << *bPtr << endl;
     }
 
     //Call the merge() subroutine:
-    arrPtr = merge(aPtr, bPtr, l, ind);
+    arrPtr = merge(aPtr, bPtr, l);
 
     return arrPtr;
 }
 
 //Merge subroutine.
 //Merge parameters: aPtr — pointer to the first array; bPtr — pointer to the second array; l — length of each array.
-// ind — Index for Manual Debugging.
 //Assumptions: 
 //  *'a' and 'b' are *sorted*.
 //  *length of a + length of b = length of c.
-int * merge(int * aPtr, int * bPtr, int l, int ind){
+int * merge(int * aPtr, int * bPtr, int l){
     
     //Create array 'c' of length 2l, which will be populated by the elements of 'a' and 'b':
     int m = 2 * l;
     int c[m];
+    
     //Create a pointer to array 'c':
     int * cPtr = &c[0];
-
-    //This is what I call 'manual debugging'...
-    cout << ind << ". This is merged array 'c':" << endl;
 
     //Populate array 'c':
     int k = 0;
@@ -114,7 +100,7 @@ int * merge(int * aPtr, int * bPtr, int l, int ind){
 
         //The issue is located in the managing of the indexes!!!
 
-        cout << "c: [" << c[i] << "]\n";
+        // cout << "c: [" << c[i] << "]\n";
     }
 
     return cPtr;
