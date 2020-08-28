@@ -47,13 +47,9 @@ int * mergeSort(int * arrPtr, int n){
     int * bPtr = &b[0];
 
     //Call the mergeSort() function on each of the arrays:
-    if(l > 1){
+    if(l >= 1){
         aPtr = mergeSort(aPtr, l);
         bPtr = mergeSort(bPtr, l);
-    }
-
-    if(l == 1){
-        simpleSort(aPtr, bPtr);
     }
 
     //Call the merge() subroutine:
