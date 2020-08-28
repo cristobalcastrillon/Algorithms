@@ -47,7 +47,7 @@ int * mergeSort(int * arrPtr, int n){
     int * bPtr = &b[0];
 
     //Call the mergeSort() function on each of the arrays:
-    if(l >= 1){
+    if(l > 1){
         aPtr = mergeSort(aPtr, l);
         bPtr = mergeSort(bPtr, l);
     }
@@ -81,14 +81,31 @@ int * merge(int * aPtr, int * bPtr, int l){
 
     //Populate array 'c':
     while(i < m){
-        if(*(aPtr+h) <= *(bPtr+k) && h < l){
+
+        if(*(aPtr+h) <= *(bPtr+k)){
             c[i] = *(aPtr+h);
-            h++;
+
+            //Making sure that it stays in the (memory) scope of the array...
+            if(h < l){
+                h++;
+            }
+
+            else{
+                *(aPtr+h-1) = *(bPtr+k)+1;
+            }
+
         }
-        if(*(bPtr+k) < *(aPtr+h) && k < l){
+
+        if(*(bPtr+k) < *(aPtr+h)){
             c[i] = *(bPtr+k);
-            k++;
+
+            //Making sure that it stays in the (memory) scope of the array...
+            if(k < l){
+                k++;
+            }
+
         }
+
         i++;
     }
 
