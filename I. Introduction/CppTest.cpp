@@ -89,13 +89,29 @@ int * merge(int * aPtr, int * bPtr, int l){
         //  'c' in i is equal to 'a' in k.
         if(*(aPtr+k) <= *(bPtr+h)){
             c[i] = *(aPtr+k);
-            k++; //Move the index 'k' one position to ensure the same value is not used again.
+
+            //Evaluate that the index 'k' is inside the space of the array 'a'.
+            if(k < l){
+                k++; //Move the index 'k' one position to ensure the same value is not used again.
+
+                if(k == l){
+                    *(aPtr+k-1) = *(bPtr+h);
+                }
+            }
         }
 
         //Otherwise (if 'a' in k is greater than 'b' in h, 'c' in i is equal to 'b' in h.
         if(*(aPtr+k) > *(bPtr+h)){
             c[i] = *(bPtr+h);
-            h++; //Move the index 'h' one position to ensure the same value is not used again.
+            
+            //Evaluate that the index 'h' is inside the space of the array 'b'.
+            if(h < l){
+                h++; //Move the index 'h' one position to ensure the same value is not used again.
+
+                if(h < l){
+                    *(bPtr+h-1) = *(aPtr+k);
+                }
+            }
         }
 
         //The issue is located in the managing of the indexes!!!
