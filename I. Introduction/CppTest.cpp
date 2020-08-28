@@ -5,7 +5,6 @@ using namespace std;
 
 int * mergeSort(int *, int);
 int * merge(int *, int *, int);
-void simpleSort(int *, int *);
 
 int main(){
 
@@ -110,19 +109,4 @@ int * merge(int * aPtr, int * bPtr, int l){
     }
 
     return cPtr;
-}
-
-
-//SimpleSort function for base case (i.e. length of each array = 1):
-void simpleSort(int * a, int * b){
-    if(*a > *b){
-
-        int temp1 = 0, temp2 = 0;
-
-        temp1 = *(a);
-        temp2 = *(b);
-
-        *(a) = temp2;
-        *(b) = temp1;
-    }
 }
