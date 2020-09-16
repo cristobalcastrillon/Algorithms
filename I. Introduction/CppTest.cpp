@@ -87,6 +87,12 @@ int * merge(int * aPtr, int * bPtr, int l){
             //Making sure that it stays in the (memory) scope of the array...
             if(h < l){
                 h++;
+                i++;
+            }
+
+            if(h == l){
+                c[i] = *(bPtr+k);
+                break;
             }
 
         }
@@ -97,11 +103,15 @@ int * merge(int * aPtr, int * bPtr, int l){
             //Making sure that it stays in the (memory) scope of the array...
             if(k < l){
                 k++;
+                i++;
+            }
+
+            if(k == l){
+                c[i] = *(aPtr+h);
+                break;
             }
 
         }
-
-        i++;
     }
 
     return cPtr;
