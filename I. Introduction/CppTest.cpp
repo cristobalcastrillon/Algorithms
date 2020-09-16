@@ -3,33 +3,27 @@
 
 using namespace std;
 
-int * mergeSort(int *, int);
-int * merge(int *, int *, int);
+void mergeSort(int[], int);
+void merge(int[], int[], int);
 
 int main(){
 
     int a[] = {2,5,4,1,3,7,8,6};
     int n =  sizeof(a)/sizeof(int);
 
-    int *aPtr = &a[0];
-
     //Print the original array:
     for(int i = 0; i < n; i++){
-        cout << "[" << *(aPtr+i) << "]\n";
+        cout << "[" << a[i] << "]\n";
     }
     
     //Call the mergeSort() function on 'a':
-    aPtr = mergeSort(aPtr, n);
-
-    //Print the sorted array:
-    for(int i = 0; i < n; i++){
-        cout << "[" << *(aPtr+i) << "]\n";
-    }
+    mergeSort(a, n);
+    
 }
 
 //MergeSort algorithm.
 //MergeSort parameters: arrPtr — pointer to the 'head' of an array; n — length of that array.
-int * mergeSort(int * arrPtr, int n){
+void mergeSort(int arr[], int n){
     //Create two temporal arrays of length l = n/2:
     int l = n/2;
     int a[l];
@@ -37,24 +31,18 @@ int * mergeSort(int * arrPtr, int n){
 
     //Populate the arrays:
     for(int i = 0; i < l; i++){
-        a[i] = *(arrPtr+i);
-        b[i] = *(arrPtr+l+i);
+        a[i] = arr[i];
+        b[i] = arr[l+i];
     }
-
-    //Create pointers for each of the arrays:
-    int * aPtr = &a[0];
-    int * bPtr = &b[0];
 
     //Call the mergeSort() function on each of the arrays:
     if(l > 1){
-        aPtr = mergeSort(aPtr, l);
-        bPtr = mergeSort(bPtr, l);
+        mergeSort(a, l);
+        mergeSort(b, l);
     }
 
     //Call the merge() subroutine:
-    arrPtr = merge(aPtr, bPtr, l);
-
-    return arrPtr;
+    merge(a, b, l);
 }
 
 //Merge subroutine.
@@ -62,14 +50,11 @@ int * mergeSort(int * arrPtr, int n){
 //Assumptions: 
 //  *'a' and 'b' are *sorted*.
 //  *length of a + length of b = length of c.
-int * merge(int * aPtr, int * bPtr, int l){
+void merge(int a[], int b[], int l){
     
     //Create array 'c' of length 2l, which will be populated by the elements of 'a' and 'b':
     int m = 2 * l;
     int c[m];
-    
-    //Create a pointer to array 'c':
-    int * cPtr = &c[0];
 
     //Indexes for 'a' and 'b' respectively.
     int h = 0;
@@ -81,8 +66,8 @@ int * merge(int * aPtr, int * bPtr, int l){
     //Populate array 'c':
     while(i < m){
 
-        if(*(aPtr+h) <= *(bPtr+k)){
-            c[i] = *(aPtr+h);
+        if(a[h] <= b[k]){
+            c[i] = a[h];
 
             //Making sure that it stays in the (memory) scope of the array...
             if(h < l){
@@ -91,14 +76,14 @@ int * merge(int * aPtr, int * bPtr, int l){
             }
 
             if(h == l){
-                c[i] = *(bPtr+k);
+                c[i] = b[k];
                 break;
             }
 
         }
 
-        if(*(bPtr+k) < *(aPtr+h)){
-            c[i] = *(bPtr+k);
+        if(b[k] < a[h]){
+            c[i] = b[k];
 
             //Making sure that it stays in the (memory) scope of the array...
             if(k < l){
@@ -107,12 +92,10 @@ int * merge(int * aPtr, int * bPtr, int l){
             }
 
             if(k == l){
-                c[i] = *(aPtr+h);
+                c[i] = a[h];
                 break;
             }
 
         }
     }
-
-    return cPtr;
 }
