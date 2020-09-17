@@ -79,29 +79,34 @@ int * merge(int * aPtr, int * bPtr, int l){
     int i = 0;
 
     //Populate array 'c':
-    while(i < m){
-
+    while(h < l && k < l){
         if(*(aPtr+h) <= *(bPtr+k)){
             c[i] = *(aPtr+h);
-
-            //Making sure that it stays in the (memory) scope of the array...
-            if(h < l){
-                h++;
-            }
-
+            h++;
+            i++;
         }
 
-        if(*(bPtr+k) < *(aPtr+h)){
+        else{
             c[i] = *(bPtr+k);
-
-            //Making sure that it stays in the (memory) scope of the array...
-            if(k < l){
-                k++;
-            }
-
+            k++;
+            i++;
         }
+    }
 
-        i++;
+    if(!(h < l)){
+        while(k < l){
+            c[i] = *(bPtr+k);
+            i++;
+            k++;
+        }
+    }
+
+    else{
+        while(h < l){
+            c[i] = *(aPtr+h);
+            i++;
+            h++;
+        }
     }
 
     return cPtr;
